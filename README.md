@@ -13,6 +13,6 @@ DevKit recipe repository, centralized storage for DevKit recipes, security not g
 4. Recipes must build successfully.  
 5. For development environments—where you only configure the toolchain without building—or for recipe templates, simply rename the folder to `Owner$TemplateName`.
 # 声明
-即使是这样，我们仍然无法保证绝对安全，因为仓库的源代码可能有问题，构建脚本可能有问题，所有强烈建议在构建前使用`devkit devlop YYYY-MM-DD.json`先配置好环境，然后认真检查源代码，最后使用`devkit build`构建
-# Declaration
-Even so, we still cannot guarantee absolute security as there may be issues with the source code of the repository and the build script. Therefore, we strongly recommend using `devkit devlop YYYY-MM-DD.json` to configure the environment before building, carefully check the source code, and finally use `devkit build` to build
+我们只负责集中配方和进行少量的安全检查，强烈建议在构建前使用`devkit devlop YYYY-MM-DD.json`先配置好环境，然后认真检查源代码，最后使用`devkit build`构建
+# Disclaimer  
+We are only responsible for centralizing the configuration and performing minimal safety checks. We strongly recommend setting up your environment first using `devkit develop YYYY-MM-DD.json`, carefully reviewing the source code, and then building with `devkit build`.
