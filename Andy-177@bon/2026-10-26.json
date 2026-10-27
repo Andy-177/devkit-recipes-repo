@@ -1,0 +1,29 @@
+{
+    "material":{
+        "repo":"https://github.com/Andy-177/bon.git",
+        "depth": 1
+    },
+    "download":[
+        {"url":"https://v6.gh-proxy.org/https://github.com/msys2/msys2-installer/releases/download/2026-09-27/msys2-base-x86_64-20260927.sfx.exe","system":"win_amd64"}
+    ],
+    "unpack":[
+        {"url":"https://v6.gh-proxy.org/https://github.com/Andy-177/bon/releases/download/release-1.0.0-dkv1/bon-dk-buildkit.zip","system":"win_amd64","extract":true}
+    ],
+    "jobs":{
+        "build-windows":{
+            "system":"win_amd64",
+            "steps":{
+                "init":{
+                    "run":[
+                        ["init.bat"]
+                    ]
+                },
+                "build":{
+                    "run":[
+                        ["buildsh.bat -c \"./build.sh\""]
+                    ]
+                }
+            }
+        }
+    }
+}
