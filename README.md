@@ -1,5 +1,5 @@
 # devkit-recipes-repo
-Safe devkit recipes, no unsafe toolchains, download safe devkit recipes from here
+DevKit recipe repository, centralized storage for DevKit recipes, security not guaranteed
 # devkit-recipe-repo 格式规范 
 1. 所有的配方都要在文件夹里，配方所在的文件夹命名格式应该是`所有者@仓库名` 
 2. 配方的文件名必须是`年-月-日.json` 
