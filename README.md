@@ -3,15 +3,17 @@ DevKit recipe repository, centralized storage for DevKit recipes, security not g
 # devkit-recipe-repo 格式规范 
 1. 所有的配方都要在文件夹里，配方所在的文件夹命名格式应该是`所有者@仓库名` 
 2. 配方的文件名必须是`年-月-日.json`或者`文件名-年-月-日.json`
-3. 文件夹里不可以有除配方外的任何东西
+3. 文件夹里只能有配方和配方所需的资产，资产即用于辅助构建或初始化环境的脚本等文件的集合，资产的命名和配方文件的命名保持一致，资产必须是zip格式
 4. 配方要可以正常构建
 5. 开发环境，即帮你配置工具链而不构建或者配方模板只用将文件夹的命名改成`所有者$模板名`即可
-# devkit-recipe-repo Formatting Guidelines  
-1. All recipes must be placed in folders, and the folder name should follow the format `Owner@Repo Name`.  
-2. The recipe file name must be in the format `Year-Month-Day.json` or `FileName-Year-Month-Day.json`.  
-3. No files other than the recipe should exist within the folder.  
-4. Recipes must build successfully.  
-5. For development environments—where you only configure the toolchain without building—or for recipe templates, simply rename the folder to `Owner$TemplateName`.
+6. 如果是供多个配方公用的资产算作模板，使用模板的命名规则即可，模板里面并不是必须要有配方，模板也可以是纯资产
+# devkit-recipe-repo Format Specification
+1. All recipes must be placed in a folder. The folder name should follow the format of "Owner@Repository Name".
+2. The file name of the recipe must be either "Year-Month-Day.json" or "File Name-Year-Month-Day.json".
+3. Only recipes and the assets required for the recipes (such as scripts used to assist in building or initializing the environment) can be in the folder. The assets are a collection of files used to assist in building or initializing the environment. The naming of the assets must be consistent with that of the recipe file. The assets must be in zip format.
+4. The recipe must be able to be built normally.
+5. Development environment, which helps configure the toolchain without building or the recipe template only needs to change the folder naming to "Owner$Template Name".
+6. If the assets are for common use by multiple recipes, they are considered as templates. The naming rule for templates can be used, and the template does not necessarily have to contain a recipe. The template can also be pure assets.
 # 声明
 我们只负责集中配方和进行少量的安全检查，强烈建议在构建前使用`devkit devlop YYYY-MM-DD.json`先配置好环境，然后认真检查源代码，最后使用`devkit build`构建
 # Disclaimer  
