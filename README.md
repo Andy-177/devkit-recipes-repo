@@ -21,5 +21,9 @@ We are only responsible for centralizing the configuration and performing minima
 
 The secure recipe does not include the build scripts written by the developer themselves in the downloaded recipe content, such as xxx.bat. Of course, this does not include the source code, such as build.gradle. However, it is not allowed to add external scripts for building through download, unpack, or unzip methods. At the same time, the toolchain used for building should all be official links, not self-made links. The links must come from official projects or official websites, and the toolchain should not contain unknown tools written by oneself. All secure recipes will be listed in the secure recipe list for reference. But even so, the secure recipe is still not necessarily safe, and it is strongly recommended to check.
 
+安全配方列表只包含用于构建的配方，不包含模板
+
+The safe recipe list only includes formulas for building, not templates.
+
 # 安全配方列表(Safe recipe list)
   - amd989@Symlinker
