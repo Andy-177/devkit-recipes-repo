@@ -1,0 +1,36 @@
+{
+    "material":{
+        "repo":"https://github.com/ServeurpersoCom/qwentts.cpp.git",
+        "depth": 1
+    },
+    "download":[
+        {"url":"https://v6.gh-proxy.org/https://github.com/msys2/msys2-installer/releases/download/2026-09-27/msys2-base-x86_64-20260927.sfx.exe","system":"win_amd64"}
+    ],
+    "unpack":[
+        {"url":"https://v6.gh-proxy.org/https://github.com/Andy-177/devkit-recipes-repo/raw/refs/heads/main/Andy-177$msys2-init/msys2-init-2026-10-28.zip","system":"win_amd64","extract":true}
+    ],
+    "expression": ["run"],
+    "jobs":{
+        "build-windows":{
+            "system":"win_amd64",
+            "steps":{
+                "init":{
+                    "run":[
+                        ["init.bat"],
+                        ["buildsh.bat -c \"pacman -S --needed --noconfirm mingw-w64-ucrt-x86_64-toolchain\""],
+                        ["buildsh.bat -c \"pacman -S --needed --noconfirm mingw-w64-ucrt-x86_64-cmake\""],
+                        ["buildsh.bat -c \"pacman -S --needed --noconfirm mingw-w64-ucrt-x86_64-git\""],
+                        ["buildsh.bat -c \"pacman -S --needed --noconfirm mingw-w64-ucrt-x86_64-openblas\""]
+                    ]
+                },
+                "build":{
+                    "run":[
+                        ["buildsh.bat -c \"cd workspace && git submodule update --init --recursive --depth 1\""],
+                        ["buildsh.bat -c \"cd workspace && rm -rf build && mkdir build && cd build && cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=\"../.devkit/msys64/ucrt64\" -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS && cmake --build . --config Release -j $(nproc)\""],
+                        ["robocopy \"?!{{get_workdir_path()}}\\workspace\\build\" \"?!{{get_recipe_path()}}\\qwentts.cpp\" /E & exit /b 0"]
+                    ]
+                }
+            }
+        }
+    }
+}
