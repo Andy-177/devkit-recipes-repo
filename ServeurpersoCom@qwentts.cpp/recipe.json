@@ -27,6 +27,7 @@
                     "run":[
                         ["buildsh.bat -c \"cd workspace && git submodule update --init --recursive --depth 1\""],
                         ["buildsh.bat -c \"cd workspace && rm -rf build && mkdir build && cd build && cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS='-static-libgcc -static-libstdc++' -DCMAKE_PREFIX_PATH=\"../.devkit/msys64/ucrt64\" -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS && cmake --build . --config Release -j $(nproc)\""],
+                        ["robocopy \"?!{{get_workdir_path()}}\\msys64\\ucrt64\\bin\" \"?!{{get_workdir_path()}}\\workspace\\build\" libopenblas.dll libgomp-1.dll libgcc_s_seh-1.dll libgfortran-5.dll libquadmath-0.dll libwinpthread-1.dll & exit /b 0"],
                         ["robocopy \"?!{{get_workdir_path()}}\\workspace\\build\" \"?!{{get_recipe_path()}}\\qwentts.cpp\" /E & exit /b 0"]
                     ]
                 }
