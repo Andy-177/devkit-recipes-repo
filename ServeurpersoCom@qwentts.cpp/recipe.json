@@ -26,7 +26,7 @@
                 "build":{
                     "run":[
                         ["buildsh.bat -c \"cd workspace && git submodule update --init --recursive --depth 1\""],
-                        ["buildsh.bat -c \"cd workspace && rm -rf build && mkdir build && cd build && cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=\"../.devkit/msys64/ucrt64\" -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS && cmake --build . --config Release -j $(nproc)\""],
+                        ["buildsh.bat -c \"cd workspace && rm -rf build && mkdir build && cd build && cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS=\"-static -static-libgcc -static-libstdc++\" -DCMAKE_PREFIX_PATH=\"../.devkit/msys64/ucrt64\" -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS && cmake --build . --config Release -j $(nproc)\""],
                         ["robocopy \"?!{{get_workdir_path()}}\\workspace\\build\" \"?!{{get_recipe_path()}}\\qwentts.cpp\" /E & exit /b 0"]
                     ]
                 }
