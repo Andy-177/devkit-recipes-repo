@@ -22,10 +22,14 @@ DevKit recipe repository, centralized storage for DevKit recipes, security not g
 
 规则的最终解释权归仓库所有者所有，目前仓库持有者是Andy-177
 
+在仓库内的所有配方以及资源如果没有特别声明统一使用MIT或CC-BY进行开放
+
 # Disclaimer
 We are only responsible for centralizing the configuration and performing minimal safety checks. We strongly recommend setting up your environment first using `devkit develop FileName.json`, carefully reviewing the source code, and then building with `devkit build`.
 
 The final interpretation of the rules belongs to the repo owner, and the current repository owner is Andy-177
+
+All the recipes and resources in the warehouse, unless specifically stated otherwise, are open under MIT or CC-BY.
 
 # 安全配方(Safe recipe)
 安全配方是配方下载的内容里没有由开发者自己写的构建脚本，比如xxx.bat这种，当然源代码里的不算，比如build.gradle，但是不允许通过download，unpack，unzip的方式加载外部脚本用于构建。同时构建用的工具链应该都是官方的链接，而不能是自己的链接，链接必须来自官方项目或官网，且工具链里不能含有自己写的不知名工具链。使用公共资产是排除的，比如unpack公共资产属于安全配方的定义，而拉取自己的私有资产不属于安全配方的定义。所有的安全配方都会列到安全配方列表里供参考。但即使这样，安全配方任然不一定安全，依然强烈建议检查。
