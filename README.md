@@ -41,6 +41,6 @@ The secure recipe does not include the build scripts written by the developer th
 The safe recipe list only includes formulas for building, not templates.
 
 # 安全配方列表(Safe recipe list)
-  - amd989@Symlinker
-  - ServeurpersoCom@qwentts.cpp
-  - Andy-177@Deskwarp
+  - `amd989@Symlinker`
+  - `ServeurpersoCom@qwentts.cpp`
+  - `Andy-177@Deskwarp`
