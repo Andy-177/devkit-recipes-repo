@@ -1,0 +1,32 @@
+{
+    "material":{
+        "repo":"https://github.com/Andy-177/Deskwarp.git",
+        "depth": 1
+    },
+    "download":[
+        {"url":"https://v6.gh-proxy.org/https://github.com/msys2/msys2-installer/releases/download/2026-09-27/msys2-base-x86_64-20260927.sfx.exe","system":"win_amd64"}
+    ],
+    "unpack":[
+        {"url":"https://v6.gh-proxy.org/https://github.com/Andy-177/devkit-recipes-repo/raw/refs/heads/main/Andy-177%25msys2-init/msys2-init-2026-10-28.zip","system":"win_amd64","extract":true}
+    ],
+    "jobs":{
+        "build-windows":{
+            "system":"win_amd64",
+            "steps":{
+                "init":{
+                    "run":[
+                        ["init.bat"],
+                        ["buildsh.bat -c \"pacman -S --needed --noconfirm mingw-w64-ucrt-x86_64-qt6-base mingw-w64-ucrt-x86_64-qt6-svg\""],
+                        ["buildsh.bat -c \"pacman -S --needed --noconfirm mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ninja\""]
+                    ]
+                },
+                "build":{
+                    "run":[
+                        ["buildsh.bat -c \"cd $(pwd)/workspace/Deskwarp && bash ./build.sh\""],
+                        ["buildsh.bat -c \"cp -r $(pwd)/workspace/Deskwarp/build ../Deskwarp\""]
+                    ]
+                }
+            }
+        }
+    }
+}
