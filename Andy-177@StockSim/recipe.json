@@ -1,0 +1,45 @@
+{
+    "material":{
+        "repo":"https://github.com/Andy-177/StockSim.git",
+        "depth": 1
+    },
+    "download":[
+        {"url":"https://v6.gh-proxy.org/https://github.com/msys2/msys2-installer/releases/download/2026-09-27/msys2-base-x86_64-20260927.sfx.exe","system":"win_amd64"}
+    ],
+    "unpack":[
+        {"url":"https://dotnetcli.azureedge.net/dotnet/Sdk/8.0.427/dotnet-sdk-8.0.427-win-x64.zip","system":"win_amd64"},
+        {"url":"https://v6.gh-proxy.org/https://github.com/Andy-177/devkit-recipes-repo/raw/refs/heads/main/Andy-177%25msys2-init/msys2-init-2026-10-28.zip","system":"win_amd64","extract":true}
+    ],
+    "env":[
+        {"key":"PATH","value":"C:\\Windows;C:\\Windows\\system32;?!{{get_workdir_path()}}\\dotnet-sdk-8.0.427-win-x64","system":"win_amd64"}
+    ],
+    "expression":["env","run"],
+    "jobs":{
+        "build-windows":{
+            "system":"win_amd64",
+            "steps":{
+                "init":{
+                    "run":[
+                        ["init.bat"],
+                        ["buildsh.bat -c \"pacman -S --needed --noconfirm base-devel python dos2unix mingw-w64-ucrt-x86_64-nodejs mingw-w64-ucrt-x86_64-python mingw-w64-ucrt-x86_64-toolchain\""]
+                    ]
+                },
+                "build":{
+                    "run":[
+                        ["buildsh.bat -use-full-path -c \"cd workspace/frontend && echo allow-scripts[]=electron > .npmrc && echo allow-scripts[]=electron-winstaller >> .npmrc && echo allow-scripts[]=esbuild >> .npmrc\""],
+                        ["buildsh.bat -use-full-path -c \"cd workspace/frontend && echo electron_mirror=https://npmmirror.com/mirrors/electron/ >> .npmrc && echo electron_builder_binaries_mirror=https://npmmirror.com/mirrors/electron-builder-binaries/ >> .npmrc\""],
+                        ["buildsh.bat -use-full-path -c \"cat workspace/frontend/.npmrc\""],
+                        ["buildsh.bat -use-full-path -c \"echo $PATH && cd workspace && cd frontend && ELECTRON_MIRROR=https://npmmirror.com/mirrors/electron/ npm install --registry=https://registry.npmmirror.com --include=dev\""],
+                        ["buildsh.bat -use-full-path -c \"ls workspace/frontend/node_modules/.bin/tsc\""],
+                        ["buildsh.bat -use-full-path -c \"echo $PATH && cd workspace && source build.sh\""]
+                    ]
+                },
+                "end_and_install":{
+                    "run":[
+                        ["robocopy \"?!{{get_workdir_path()}}\\workspace\\frontend\\release\" \"?!{{get_recipe_path()}}\" \"StockSim Setup 0.3.0.exe\""]
+                    ]
+                }
+            }
+        }
+    }
+}
