@@ -1,0 +1,34 @@
+{
+    "clone":{
+        "repo":"https://github.com/yushijinhun/authlib-injector.git",
+        "depth":1
+    },
+    "download":[
+        {"url":"https://v6.gh-proxy.org/https://github.com/git-for-windows/git/releases/download/v2.56.1.windows.1/PortableGit-2.56.1-64-bit.7z.exe","system":"win_amd64"}
+    ],
+    "unpack":[
+        {"url":"https://v6.gh-proxy.org/https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21+9/OpenJDK17U-jdk_x64_windows_hotspot_17.0.21_9.zip","system":"win_amd64","extract":true}
+    ],
+    "expression":["env"],
+    "env":[
+        {"key":"PATH","value":"C:\\Windows;C:\\Windows\\system32;?!{{get_workdir_path()}}\\jdk-17.0.21+9\\bin;?!{{get_workdir_path()}}\\PortableGit\\cmd","system":"win_amd64"},
+        {"key":"JAVA_HOME","value":"?!{{get_workdir_path()}}\\jdk-17.0.21+9","system":"win_amd64"}
+    ],
+    "jobs":{
+        "build-windows":{
+            "system":"win_amd64",
+            "steps":{
+                "init":{
+                    "run":[
+                        ["PortableGit-2.56.1-64-bit.7z.exe"]
+                    ]
+                },
+                "build":{
+                    "run":[
+                        ["cd workspace && echo %PATH% && echo %JAVA_HOME% && gradlew.bat"]
+                    ]
+                }
+            }
+        }
+    }
+}
