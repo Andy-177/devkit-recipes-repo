@@ -1,5 +1,5 @@
 {
-    "material":{
+    "clone":{
         "repo":"https://github.com/ServeurpersoCom/qwentts.cpp.git",
         "depth": 1
     },

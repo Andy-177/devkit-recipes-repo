@@ -1,5 +1,5 @@
 {
-    "material":{
+    "clone":{
         "repo":"https://github.com/Andy-177/bon.git",
         "depth": 1
     },

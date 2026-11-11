@@ -1,5 +1,5 @@
 {
-    "material":{
+    "clone":{
         "repo":"https://github.com/Andy-177/StockSim.git",
         "depth": 1
     },
