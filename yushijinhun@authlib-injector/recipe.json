@@ -9,9 +9,9 @@
     "unpack":[
         {"url":"https://v6.gh-proxy.org/https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21+9/OpenJDK17U-jdk_x64_windows_hotspot_17.0.21_9.zip","system":"win_amd64","extract":true}
     ],
-    "expression":["env"],
+    "expression":["env","run"],
     "env":[
-        {"key":"PATH","value":"C:\\Windows;C:\\Windows\\system32;?!{{get_workdir_path()}}\\jdk-17.0.21+9\\bin;?!{{get_workdir_path()}}\\PortableGit\\cmd","system":"win_amd64"},
+        {"key":"PATH","value":"C:\\Windows;C:\\Windows\\system32;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;?!{{get_workdir_path()}}\\jdk-17.0.21+9\\bin;?!{{get_workdir_path()}}\\PortableGit\\cmd","system":"win_amd64"},
         {"key":"JAVA_HOME","value":"?!{{get_workdir_path()}}\\jdk-17.0.21+9","system":"win_amd64"}
     ],
     "jobs":{
@@ -20,12 +20,24 @@
             "steps":{
                 "init":{
                     "run":[
-                        ["PortableGit-2.56.1-64-bit.7z.exe"]
+                        ["PortableGit-2.56.1-64-bit.7z.exe"],
+                        ["echo 接下来会执行powershell脚本来进行镜像源替换，这步可能会触发安全软件警告，如果安全软件尝试拦截此操作请点击允许"],
+                        ["echo Next, a PowerShell script will run to replace the image source. This step might trigger security software warnings, so if your security software tries to block it, please click Allow."],
+                        ["echo."],
+                        ["echo 如果你同意按任意键继续，不同意请关闭终端退出"],
+                        ["echo Press any key to continue if you agree, or close the terminal to exit if you don't."],
+                        ["pause"],
+                        ["set GRADLE_PROPS_PATH=?!{{get_workdir_path()}}\\workspace\\gradle\\wrapper\\gradle-wrapper.properties && powershell -NoProfile -EncodedCommand JABwACAAPQAgACQAZQBuAHYAOgBHAFIAQQBEAEwARQBfAFAAUgBPAFAAUwBfAFAAQQBUAEgACgB3AGgAaQBsAGUAKAAkAHQAcgB1AGUAKQB7AAoAIAAgACQAYQA9AFIAZQBhAGQALQBIAG8AcwB0ACAAJwBgTyhXLU79VhdUKABBAHIAZQAgAHkAbwB1ACAAaQBuACAAQwBoAGkAbgBhAD8AKQBbAFkALwBOAF0AJwAKACAAIABpAGYAKAAkAGEAIAAtAGUAcQAgACcAWQAnACAALQBvAHIAIAAkAGEAIAAtAGUAcQAgACcAeQAnACkAewAKACAAIAAgACAAJABjAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACQAcAApAAoAIAAgACAAIAAkAGMAPQAkAGMALgBSAGUAcABsAGEAYwBlACgAJwBkAGkAcwB0AHIAaQBiAHUAdABpAG8AbgBVAHIAbAA9AGgAdAB0AHAAcwBcADoALwAvAHMAZQByAHYAaQBjAGUAcwAuAGcAcgBhAGQAbABlAC4AbwByAGcALwBkAGkAcwB0AHIAaQBiAHUAdABpAG8AbgBzAC8AZwByAGEAZABsAGUALQA4AC4AMAAuADIALQBhAGwAbAAuAHoAaQBwACcALAAnAGQAaQBzAHQAcgBpAGIAdQB0AGkAbwBuAFUAcgBsAD0AaAB0AHQAcABzAFwAOgAvAC8AbQBpAHIAcgBvAHIAcwAuAGMAbABvAHUAZAAuAHQAZQBuAGMAZQBuAHQALgBjAG8AbQAvAGcAcgBhAGQAbABlAC8AZwByAGEAZABsAGUALQA4AC4ANQAtAGIAaQBuAC4AegBpAHAAJwApAAoAIAAgACAAIABbAEkATwAuAEYAaQBsAGUAXQA6ADoAVwByAGkAdABlAEEAbABsAFQAZQB4AHQAKAAkAHAALAAkAGMAKQAKACAAIAAgACAAVwByAGkAdABlAC0ASABvAHMAdAAgACcA8l3/ZmJjEGJclc9QkG4oAEgAYQBzACAAYgBlAGUAbgAgAHMAdwBpAHQAYwBoAGUAZAAgAHQAbwAgAGEAIABtAGkAcgByAG8AcgAgAHMAbwB1AHIAYwBlACkAJwAKACAAIAAgACAAYgByAGUAYQBrAAoAIAAgAH0AIABlAGwAcwBlAGkAZgAoACQAYQAgAC0AZQBxACAAJwBOACcAIAAtAG8AcgAgACQAYQAgAC0AZQBxACAAJwBuACcAKQB7AAoAIAAgACAAIABXAHIAaQB0AGUALQBIAG8AcwB0ACAAJwAqZ9uPTIj/ZmJjKABOAG8AdAAgAHIAZQBwAGwAYQBjAGUAZAApACcACgAgACAAIAAgAGIAcgBlAGEAawAKACAAIAB9ACAAZQBsAHMAZQAgAHsACgAgACAAIAAgAFcAcgBpAHQAZQAtAEgAbwBzAHQAIAAnAJOPZVEZle+LDP/3i5OPZVFZABZiTgAoAEkAbgBwAHUAdAAgAGUAcgByAG8AcgAsACAAcABsAGUAYQBzAGUAIABlAG4AdABlAHIAIABZACAAbwByACAATgApACcAIAAtAEYAbwByAGUAZwByAG8AdQBuAGQAQwBvAGwAbwByACAAUgBlAGQACgAgACAAfQAKAH0A"]
                     ]
                 },
                 "build":{
                     "run":[
-                        ["cd workspace && echo %PATH% && echo %JAVA_HOME% && gradlew.bat"]
+                        ["cd workspace && echo %PATH% && echo %JAVA_HOME% && gradlew.bat"],
+                        ["robocopy ?!{{get_workdir_path()}}\\workspace\\build\\libs ?!{{get_recipe_path()}} authlib-injector-snapshot.dirty.jar & exit /b 0"],
+                        ["echo 构建完成，接下来将清理进程，这会执行powershell指令，请让安全软件放行此操作，如果你不想放行请立刻关闭终端，否则按任意键继续"],
+                        ["echo Build complete. Next, the cleanup process will run, which will execute a PowerShell command. Please allow your security software to let this operation through. If you don't want to allow it, please close the terminal immediately, otherwise press any key to continue."],
+                        ["pause"],
+                        ["powershell -EncodedCommand RwBlAHQALQBQAHIAbwBjAGUAcwBzACAAfAAgAFcAaABlAHIAZQAtAE8AYgBqAGUAYwB0ACAAewAkAF8ALgBQAGEAdABoACAALQBlAHEAIAAnAEgAOgBcAGIAdQBpAGwAZABlAHIAXAB5AHUAcwBoAGkAagBpAG4AaAB1AG4AQABhAHUAdABoAGwAaQBiAC0AaQBuAGoAZQBjAHQAbwByAFwALgBkAGUAdgBrAGkAdABcAGoAZABrAC0AMQA3AC4AMAAuADIAMQArADkAXABiAGkAbgBcAGoAYQB2AGEALgBlAHgAZQAnAH0AIAB8ACAAUwB0AG8AcAAtAFAAcgBvAGMAZQBzAHMAIAAtAEYAbwByAGMAZQA="]
                     ]
                 }
             }
