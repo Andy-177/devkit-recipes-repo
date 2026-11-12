@@ -20,6 +20,9 @@
             "steps":{
                 "init":{
                     "run":[
+                        ["echo 请务必使用管理员权限终端执行此构建，否则会构建失败，如果不是管理员权限请立刻关闭终端在管理员权限下运行，如果是管理员权限请按任意键继续"],
+                        ["echo Be sure to run this build in a terminal with admin privileges, or it will fail. If you’re not running as an admin, close the terminal and run it with admin privileges. If you are an admin, press any key to continue."],
+                        ["pause"],
                         ["init.bat"],
                         ["buildsh.bat -c \"pacman -S --needed --noconfirm base-devel python dos2unix mingw-w64-ucrt-x86_64-nodejs mingw-w64-ucrt-x86_64-python mingw-w64-ucrt-x86_64-toolchain\""]
                     ]
@@ -36,7 +39,7 @@
                 },
                 "end_and_install":{
                     "run":[
-                        ["robocopy \"?!{{get_workdir_path()}}\\workspace\\frontend\\release\" \"?!{{get_recipe_path()}}\" \"StockSim Setup 0.3.0.exe\""]
+                        ["robocopy \"?!{{get_workdir_path()}}\\workspace\\frontend\\release\" \"?!{{get_recipe_path()}}\" \"StockSim Setup 0.3.0.exe\" & exit /b 0"]
                     ]
                 }
             }
